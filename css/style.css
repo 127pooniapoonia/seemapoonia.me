@@ -1,23 +1,7 @@
 /*
 * Resume template
-* Created by : Ahmed Essa
-* website : www.ahmedessa.net
-*/
-
-
-/* Table of Content
-==================================================
-	- Google fonts & font family -
-	- typography -
-	- General -
-    - Preloader -
-	- Header -
-    - home section -
-    - About section -
-    - experience section -
-    - projects section -
-    - Contact section -
-    - Responsive media queries -
+* Created by : Seema Poonia
+* website : https://seemapoonia.me
 */
 
 
@@ -255,12 +239,12 @@ nav li a {
 }
 
 .bg-nav {
-    background: #fff;
+    background: #f3f3f3;
     border-bottom: 1px solid #f3f3f3
 }
 
 .bg-nav ul {
-    padding: 10px;
+    /*padding: 0 10px ;*/
 }
 
 a:focus {
@@ -282,7 +266,7 @@ a.active {
 ==================================================*/
 
 #home {
-    background: url(../img/home-bg-2.jpg);
+    background: url(../img/seema_cover_bg.png);
     background-size: cover;
     height: 100vh;
 }
@@ -799,4 +783,13 @@ fieldset {
     nav li a {
         font-size: 10px;
     }
+}
+.p-skill{
+    padding: 0 20px 0 0;
+}
+.d-flex{
+    display:flex;
+}
+.progress-bar{
+    background-color:#425BB5 !important;
 }
