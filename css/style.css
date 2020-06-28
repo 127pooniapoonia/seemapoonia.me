@@ -820,3 +820,9 @@ fieldset {
 .highlight{
     color:#ff7043;
 }
+a.doc{
+    color:#ff7043;
+}
+a.doc:hover{
+    color:#000000;
+}
