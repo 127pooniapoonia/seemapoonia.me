@@ -843,7 +843,7 @@ a.doc:hover{
 .projects-1{
     display: flex;
     align-items: center;
-    margin-top:-40px;
+    margin-top:40px;
     flex-wrap:wrap;
 }
 .projects-div{
