@@ -287,7 +287,9 @@ a.active {
 ==================================================*/
 
 #home {
-    background: url(../img/seema_cover_bg.png);
+    /* background: url(../img/seema_cover_bg.png); */
+    background: url(../img/bg-cover.jpg);
+
     background-size: cover;
     height: 100vh;
 }
