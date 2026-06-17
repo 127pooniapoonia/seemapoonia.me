@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = 'Seema Poonia — Sr. Frontend Engineer & Tech Lead',
-  description = 'Sr. Frontend Engineer & Tech Lead at Electrum. 6+ years building and leading frontend products — React, Angular, TypeScript. Available for senior and lead roles.',
+  title = 'Seema Poonia — Senior Software Developer & Development Lead | React · Angular · TypeScript',
+  description = 'Senior Software Developer & Development Lead with 8+ years building scalable products from scratch in React & Angular. System design, team leadership, and end-to-end delivery at Electrum (formerly Pick My Solar India), India.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -25,6 +25,9 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="author" content="Seema Poonia" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="Seema Poonia, Senior Software Developer, Development Lead, React Developer, Angular Developer, TypeScript, System Design, Software Engineer India, Tech Lead India, Frontend Lead, Electrum, Pick My Solar India" />
 
     <!-- Open Graph -->
     <meta property="og:url" content={canonicalURL} />
@@ -32,6 +35,8 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:site_name" content="Seema Poonia" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -65,9 +70,22 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Seema Poonia",
-        "jobTitle": "Sr. Frontend Engineer & Tech Lead",
+        "jobTitle": "Senior Software Developer & Development Lead",
         "url": "https://seemapoonia.me",
-        "email": "seema@electrum.co",
+        "email": "seema.127poonia@gmail.com",
+        "image": "https://seemapoonia.me/img/seema_cover.png",
+        "nationality": "Indian",
+        "description": "Senior Software Developer and Development Lead with 8+ years of experience architecting and building scalable web products from scratch using React and Angular. Focused on system design, technical leadership, and end-to-end delivery.",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Electrum",
+          "alternateName": "Pick My Solar India Pvt. Ltd."
+        },
+        "knowsAbout": [
+          "React", "Angular", "TypeScript", "JavaScript",
+          "System Design", "Frontend Architecture", "Technical Leadership",
+          "Performance Optimization", "UI Development", "Team Leadership"
+        ],
         "sameAs": [
           "https://github.com/127pooniapoonia",
           "https://www.linkedin.com/in/seema-poonia/"
