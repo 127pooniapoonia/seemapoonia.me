@@ -1,0 +1,26 @@
+---
+const stats = [
+  { value: '6+', unit: 'years', label: 'at one company' },
+  { value: '4', unit: 'products', label: 'in production' },
+  { value: '45.7%', unit: 'faster', label: 'after React migration' },
+  { value: '3+', unit: 'engineers', label: 'hired & mentored' },
+];
+---
+
+<section id="impact" class="bg-brand py-16">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
+      {stats.map((stat) => (
+        <div class="reveal">
+          <div class="font-display text-5xl md:text-6xl font-bold leading-none">
+            {stat.value}
+          </div>
+          <div class="text-sm font-bold uppercase tracking-widest mt-1 text-white/70">
+            {stat.unit}
+          </div>
+          <div class="text-xs text-white/50 mt-1">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

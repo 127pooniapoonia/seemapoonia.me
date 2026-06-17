@@ -1,0 +1,83 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import { skillGroups } from '../data/skills';
+---
+
+<section id="about" class="py-24 bg-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="reveal">
+      <SectionLabel number="01" />
+      <h2 class="font-display text-5xl md:text-6xl text-gray-900 mb-16">
+        Know <br />About me
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-12 items-start">
+      <!-- Text: 2 cols -->
+      <div class="md:col-span-2 space-y-5 text-gray-600 leading-relaxed reveal">
+        <p>
+          Hi, I'm Seema — and I trust you're doing well.
+        </p>
+        <p>
+          I'm a <strong class="text-gray-900">Senior Frontend Engineer at Electrum</strong> with 6+ years
+          of ownership over the company's entire frontend ecosystem — from consumer-facing solar
+          marketplaces to internal operations platforms. I've worked across React, Angular, TypeScript,
+          and Node.js, and I care deeply about performance, accessibility, and interfaces that earn user trust.
+        </p>
+        <p>
+          Beyond the code, I've <strong class="text-gray-900">bootstrapped the frontend team from scratch</strong>:
+          designed our hiring process, led tech interviews, onboarded engineers, and established the
+          architecture standards and release cadence we still use. I'm the person leadership calls
+          when there's a new problem statement and no existing playbook.
+        </p>
+        <p>
+          Outside of work, you'll find me with a well-brewed cup of coffee, exploring new destinations,
+          folding origami, or deep in a good TV series. In everything I do — bold or italic, never regular. 😊
+        </p>
+
+        <!-- Resume download -->
+        <div class="pt-4">
+          <a
+            href="/img/Seema_Poonia_Senior_Frontend_Developer_Resume.pdf"
+            download
+            class="inline-block border-2 border-brand text-brand hover:bg-brand hover:text-white text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors duration-200"
+          >
+            Download Resume
+          </a>
+        </div>
+      </div>
+
+      <!-- Photo placeholder: 1 col -->
+      <div class="reveal">
+        <div class="aspect-square bg-surface border-2 border-brand/20 flex items-center justify-center text-gray-400 text-sm">
+          <!-- Replace with: <img src="/img/seema_photo.jpg" alt="Seema Poonia" class="w-full h-full object-cover" /> -->
+          <span class="text-center px-4 text-xs text-gray-400 leading-relaxed">
+            Add profile photo<br />
+            <code class="text-[10px]">public/img/seema_photo.jpg</code>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="mt-20 reveal">
+      <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Skills</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {skillGroups.map((group) => (
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-brand mb-3">
+              {group.name}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 font-medium">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,88 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import { projects } from '../data/projects';
+
+const roleBadgeColor: Record<string, string> = {
+  'Sole Owner': 'bg-brand text-white',
+  'Lead':       'bg-gray-800 text-white',
+  'Contributor':'bg-gray-200 text-gray-700',
+};
+---
+
+<section id="projects" class="py-24 bg-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="reveal">
+      <SectionLabel number="03" />
+      <h2 class="font-display text-5xl md:text-6xl text-gray-900 mb-4">
+        My <br />Projects
+      </h2>
+      <p class="text-sm text-gray-400 mb-16">Things I've owned, led, and shipped.</p>
+    </div>
+
+    <div class="space-y-20">
+      {projects.map((project, i) => (
+        <div class={`reveal flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-10 items-center`}>
+          <!-- Image -->
+          <div class="w-full md:w-2/5 flex-shrink-0">
+            <img
+              src={project.img}
+              alt={project.imgAlt}
+              loading="lazy"
+              class="w-full h-64 object-cover object-top border border-gray-200"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1">
+            <!-- Badges -->
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 ${roleBadgeColor[project.role]}`}>
+                {project.role}
+              </span>
+              {project.stack.map((tech) => (
+                <span class="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 border border-gray-200 text-gray-500">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <h3 class="font-display text-2xl text-gray-900 mb-1">{project.title}</h3>
+            <p class="text-sm text-brand font-medium mb-4">{project.description}</p>
+
+            <ul class="space-y-2 mb-6">
+              {project.bullets.map((bullet) => (
+                <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                  <span class="text-brand mt-1 flex-shrink-0">▸</span>
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- CTA -->
+            {project.isInternal ? (
+              <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 border border-gray-200 px-4 py-2">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Internal Tool — Available on Request
+              </span>
+            ) : project.link ? (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class={`inline-block text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors duration-200 ${
+                  project.linkLabel === 'View Document'
+                    ? 'border border-brand text-brand hover:bg-brand hover:text-white'
+                    : 'bg-brand text-white hover:bg-brand-dark'
+                }`}
+              >
+                {project.linkLabel}
+              </a>
+            ) : null}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

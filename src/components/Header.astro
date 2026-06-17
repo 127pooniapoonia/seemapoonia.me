@@ -1,0 +1,136 @@
+---
+const navLinks = [
+  { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300"
+>
+  <div class="max-w-5xl mx-auto px-6 py-5 flex items-center justify-center relative">
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex gap-10" aria-label="Main navigation">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class="nav-link text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-brand transition-colors duration-200"
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-toggle"
+      class="md:hidden absolute right-6 p-2 text-gray-600 hover:text-brand transition-colors"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-100"
+  >
+    <nav class="flex flex-col py-4 px-6 gap-4" aria-label="Mobile navigation">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class="mobile-nav-link text-xs font-bold uppercase tracking-widest text-gray-600 hover:text-brand transition-colors duration-200 py-2"
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const toggle = document.getElementById('nav-toggle')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const iconMenu = document.getElementById('icon-menu')!;
+  const iconClose = document.getElementById('icon-close')!;
+
+  // Background on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+    } else {
+      header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+    }
+  });
+
+  // Hamburger toggle
+  toggle.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    iconMenu.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      iconMenu.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Active nav link via IntersectionObserver
+  const sections = document.querySelectorAll<HTMLElement>('section[id], div[id]');
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.toggle(
+              'text-brand',
+              link.getAttribute('href') === `#${entry.target.id}`
+            );
+            link.classList.toggle(
+              'text-gray-600',
+              link.getAttribute('href') !== `#${entry.target.id}`
+            );
+          });
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+
+  sections.forEach((s) => observer.observe(s));
+
+  // Scroll-reveal for .reveal elements
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+</script>

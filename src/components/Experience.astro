@@ -1,0 +1,74 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import { experience } from '../data/experience';
+---
+
+<section id="experience" class="py-24 bg-surface">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="reveal">
+      <SectionLabel number="02" />
+      <h2 class="font-display text-5xl md:text-6xl text-gray-900 mb-16">
+        My <br />Experience
+      </h2>
+    </div>
+
+    <div class="space-y-16">
+      {experience.map((entry, i) => (
+        <div class="reveal relative pl-8">
+          <!-- Timeline line -->
+          <div class="timeline-line"></div>
+          <!-- Timeline dot -->
+          <div class="timeline-dot"></div>
+
+          <!-- Header -->
+          <div class="mb-6">
+            <span class="inline-block text-xs font-bold uppercase tracking-widest text-white bg-gray-800 px-3 py-1 mb-3">
+              {entry.period}
+            </span>
+            <h3 class="font-display text-3xl text-gray-900">
+              {entry.company}
+            </h3>
+            {entry.formerName && (
+              <p class="text-xs text-gray-400 mt-0.5">{entry.formerName}</p>
+            )}
+            <p class="text-brand font-bold tracking-wide text-sm mt-1">{entry.title}</p>
+          </div>
+
+          <!-- What I Built -->
+          {entry.built.length > 0 && (
+            <div class="mb-6">
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
+                What I Built
+              </h4>
+              <ul class="space-y-2">
+                {entry.built.map((item) => (
+                  <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                    <span class="text-brand mt-1 flex-shrink-0">▸</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- How I Led -->
+          {entry.led.length > 0 && (
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
+                How I Led
+              </h4>
+              <ul class="space-y-2">
+                {entry.led.map((item) => (
+                  <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                    <span class="text-brand mt-1 flex-shrink-0">▸</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
