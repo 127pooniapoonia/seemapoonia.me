@@ -1,8 +1,9 @@
 export interface ExperienceEntry {
   company: string;
   formerName?: string;
-  title: string;
+  roles: { title: string; period: string }[];
   period: string;
+  location?: string;
   built: string[];
   led: string[];
 }
@@ -10,33 +11,43 @@ export interface ExperienceEntry {
 export const experience: ExperienceEntry[] = [
   {
     company: 'Electrum',
-    formerName: 'formerly Pick My Solar India Pvt. Ltd',
-    title: 'Sr. Frontend Engineer & Tech Lead',
-    period: 'November 2019 – Present',
+    formerName: 'formerly Pick My Solar India Pvt. Ltd · CleanTech (solar energy & EV)',
+    roles: [
+      { title: 'Team Lead', period: 'Sep 2024 – Present' },
+      { title: 'Senior Frontend Developer', period: 'Apr 2021 – Aug 2024' },
+      { title: 'Frontend Developer', period: 'Nov 2019 – Mar 2021' },
+    ],
+    period: 'Nov 2019 – Present',
+    location: 'Hyderabad, India',
     built: [
-      'Sole architect and developer of Control Center — Electrum\'s React-based internal operations platform, built 0→1. Designed the full UI/UX, established the component architecture, and own every release.',
-      'Migrated the legacy PHP monolith to React, improving Speed Index by 45.7% and enabling a modern deployment pipeline.',
-      'Built the Angular Dependency Injection widget deployed as a white-label app across LG Solar, Solar.com, and partner platforms.',
-      'Implemented JWT-based auth, Google SSO, and end-to-end RBAC across all products.',
-      'Authored Electrum\'s internal ADA Compliance standard — the reference document for all frontend accessibility work.',
+      'Architected and rebuilt the legacy PHP Control Center admin dashboard as a React application on an atomic-design architecture, with Redux and Context for state. Code splitting, lazy loading and memoization improved speed index by 45.7%.',
+      'Built the main customer-facing Angular application, configurable by text, features and theme per partner, so onboarding a new partner takes configuration only (20+ partners onboarded). Implemented A/B split testing, analysed traffic and iterated for better UX, with cross-browser support and ADA compliance throughout.',
+      'Implemented configurable HTML-to-PDF generation for customer quotes and invoices.',
+      'Designed and built a permission-based RBAC system: admins compose custom roles from granular permissions, and every route, section, field and action is guarded on the frontend.',
+      'Designed the architecture of and developed the Installer Dashboard, a self-service portal with organization-based RBAC where installers onboard, manage sub-users, track their assigned leads, set equipment pricing and send quotes across solar, battery, HPWH, EV charger and backup power products.',
+      'Designed the architecture of and built the first release of Hubble, the React + Redux lead and operations platform: lead management, bids for home-energy projects, installer reassignment and calculation configurations.',
+      'Owned the external Partner Reporting Portal end-to-end across 3 repositories, giving partners role-scoped access to embedded Amazon QuickSight and Looker Studio dashboards. Wrote the PRD and shipped it task by task with Vitest unit tests, using AI-assisted development (Claude with Playwright, Chrome DevTools and Figma MCPs).',
+      'Built a full observability stack (Google Analytics, Mouseflow, Datadog, custom event tracking, cookie consent) to map user flows and find conversion drop-offs.',
+      'Established frontend security standards — JWT authorization and Google SSO — enforced through PR reviews.',
+      'Delivered ADA/WCAG accessibility compliance, including complete keyboard navigation across all applications.',
     ],
     led: [
-      'Designed and ran the frontend hiring process end-to-end — wrote the technical rubric, conducted interviews, and onboarded 3+ engineers.',
-      'Own sprint planning, release management, and deployments across Dev / UAT / Production environments.',
+      'Lead a cross-functional team of 7 (frontend, backend, QA) — sprint planning, LOE estimation, PR-review standards and technical feasibility assessment.',
+      'Conduct frontend technical interviews and onboard new engineers.',
+      'Defined architecture, prioritization and edge cases for backend services built with the senior backend engineer: a predictive lead-distribution engine ranking thousands of installers, a secure PII file-processing pipeline (CRON, SFTP, AWS Lambda), and a serverless coupon microservice whose first campaign issued 20,000 coupons at a 90% redemption rate.',
+      "After launching each product's first version, handed it over to the team and led its continued development as Team Lead.",
+      'Own release management and deployments across Dev / UAT / Production environments.',
       'Primary R&D lead for new product problem statements — trusted by executive leadership to scope and prototype novel solutions.',
-      'Code review owner for the frontend team; established standards for performance, accessibility, and cross-browser compatibility.',
     ],
   },
   {
     company: 'Wipro Technologies',
-    title: 'Project Engineer',
-    period: 'July 2018 – June 2019',
+    roles: [{ title: 'Project Engineer', period: 'Jul 2018 – Jun 2019' }],
+    period: 'Jul 2018 – Jun 2019',
     built: [
-      'Built an Angular 2+ internal web portal for project data management used across the team.',
-      'Created, updated, and reviewed features to ensure QA standards.',
+      'Developed Angular 2+ web portals for enterprise clients, managing project team databases and workflows.',
+      'Reviewed and validated team-built features for quality, correctness, and specification adherence.',
     ],
-    led: [
-      'Trained in Full Stack Development technologies; collaborated with developer teams to implement and review deliverables.',
-    ],
+    led: [],
   },
 ];

@@ -1,24 +1,22 @@
 ---
 const stats = [
-  { value: '6+', unit: 'years', label: 'at one company' },
-  { value: '4', unit: 'products', label: 'in production' },
-  { value: '45.7%', unit: 'faster', label: 'after React migration' },
-  { value: '3+', unit: 'engineers', label: 'hired & mentored' },
+  { value: 8, suffix: '', unit: 'Years', label: 'building for the web' },
+  { value: 7, suffix: '', unit: 'Engineers', label: 'led as Team Lead' },
+  { value: 6, suffix: '', unit: 'Products', label: 'architected & launched' },
+  { value: 20, suffix: '+', unit: 'Partners', label: 'onboarded on a white-label platform' },
 ];
 ---
 
-<section id="impact" class="bg-brand py-16">
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
-      {stats.map((stat) => (
-        <div class="reveal">
-          <div class="font-display text-5xl md:text-6xl font-bold leading-none">
-            {stat.value}
+<section id="impact" class="relative z-20 -mt-14 bg-[linear-gradient(to_bottom,transparent_56px,#f6f7f9_56px)]">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="card grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+      {stats.map((stat, i) => (
+        <div class="reveal p-6 md:p-8 text-center" style={`--d: ${i * 100}ms`}>
+          <div class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+            <span data-count={stat.value} data-decimals={stat.decimals ?? 0}>0</span><span class="text-brand">{stat.suffix}</span>
           </div>
-          <div class="text-sm font-bold uppercase tracking-widest mt-1 text-white/70">
-            {stat.unit}
-          </div>
-          <div class="text-xs text-white/50 mt-1">{stat.label}</div>
+          <div class="text-xs font-bold uppercase tracking-widest text-brand mt-2">{stat.unit}</div>
+          <div class="text-sm text-gray-500 mt-1">{stat.label}</div>
         </div>
       ))}
     </div>

@@ -10,6 +10,11 @@ export const POST: APIRoute = async ({ request }) => {
     const phone   = formData.get('phone')?.toString().trim() ?? '';
     const message = formData.get('message')?.toString().trim() ?? '';
 
+    // Honeypot filled → bot. Pretend success so it doesn't retry.
+    if (formData.get('website')?.toString()) {
+      return Response.json({ success: true });
+    }
+
     if (!name || !email || !message) {
       return Response.json({ error: 'Name, email, and message are required.' }, { status: 400 });
     }

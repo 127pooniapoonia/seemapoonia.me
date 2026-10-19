@@ -1,10 +1,9 @@
 ---
 interface Props {
   number: string;
+  label: string;
 }
-const { number } = Astro.props;
+const { number, label } = Astro.props;
 ---
 
-<div class="section-label">
-  <span class="text-brand font-bold tracking-widest text-xs uppercase font-sans">{number}</span>
-</div>
+<p class="eyebrow mb-4">{number} — {label}</p>

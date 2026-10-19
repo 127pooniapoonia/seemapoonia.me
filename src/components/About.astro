@@ -1,78 +1,79 @@
 ---
 import SectionLabel from './SectionLabel.astro';
 import { skillGroups } from '../data/skills';
+
+const highlights = [
+  { title: 'Promoted twice', text: 'Frontend Developer → Senior (2021) → Team Lead (2024) at one company.' },
+  { title: 'Architect to lead', text: 'Six products architected and launched, then led as the team took them forward.' },
+  { title: 'Frontend-led full-stack', text: 'Shaped serverless and event-driven backend services with backend engineers.' },
+];
 ---
 
-<section id="about" class="py-24 bg-white">
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="reveal">
-      <SectionLabel number="01" />
-      <h2 class="font-display text-5xl md:text-6xl text-gray-900 mb-16">
-        Know <br />About me
-      </h2>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-12 items-start">
-      <!-- Text: 2 cols -->
-      <div class="md:col-span-2 space-y-5 text-gray-600 leading-relaxed reveal">
-        <p>
-          Hi, I'm Seema — and I trust you're doing well.
-        </p>
-        <p>
-          I'm a <strong class="text-gray-900">Senior Frontend Engineer at Electrum</strong> with 6+ years
-          of ownership over the company's entire frontend ecosystem — from consumer-facing solar
-          marketplaces to internal operations platforms. I've worked across React, Angular, TypeScript,
-          and Node.js, and I care deeply about performance, accessibility, and interfaces that earn user trust.
-        </p>
-        <p>
-          Beyond the code, I've <strong class="text-gray-900">bootstrapped the frontend team from scratch</strong>:
-          designed our hiring process, led tech interviews, onboarded engineers, and established the
-          architecture standards and release cadence we still use. I'm the person leadership calls
-          when there's a new problem statement and no existing playbook.
-        </p>
-        <p>
-          Outside of work, you'll find me with a well-brewed cup of coffee, exploring new destinations,
-          folding origami, or deep in a good TV series. In everything I do — bold or italic, never regular. 😊
-        </p>
-
-        <!-- Resume download -->
-        <div class="pt-4">
-          <a
-            href="/img/Seema_Poonia_Senior_Frontend_Developer_Resume.pdf"
-            download
-            class="inline-block border-2 border-brand text-brand hover:bg-brand hover:text-white text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors duration-200"
-          >
-            Download Resume
+<section id="about" class="py-24 md:py-32 bg-surface">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-[1.2fr,1fr] gap-14 items-start">
+      <!-- Story -->
+      <div class="reveal">
+        <SectionLabel number="01" label="About" />
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-8 leading-tight">
+          I build the products, the team <span class="text-gradient">and the process</span> that ship them.
+        </h2>
+        <div class="space-y-5 text-gray-600 leading-relaxed">
+          <p>
+            I'm a <strong class="text-gray-900">Senior Software Engineer and Team Lead</strong> with 8 years of
+            experience, 7 of them at Electrum, where I own the company's entire frontend ecosystem — from
+            consumer-facing home-energy marketplaces to internal operations platforms. I care deeply about
+            performance, accessibility and interfaces that earn user trust.
+          </p>
+          <p>
+            I joined as a Frontend Developer, was promoted to Senior in 2021 and to Team Lead in 2024,
+            and now <strong class="text-gray-900">lead a cross-functional team of 7</strong> (frontend, backend, QA):
+            sprint planning, estimation, PR-review standards, tech interviews and onboarding. I'm the person
+            leadership calls when there's a new problem statement and no existing playbook.
+          </p>
+          <p>
+            I'm open to Senior and Lead roles in Hyderabad or remote, and I'm an
+            <strong class="text-gray-900">immediate joiner</strong>.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-4 mt-8">
+          <a href="/Seema_Poonia_Resume.pdf" download class="btn-primary">
+            Download Resume <span class="arrow" aria-hidden="true">↓</span>
+          </a>
+          <a href="#contact" class="btn-outline">
+            Get in touch <span class="arrow" aria-hidden="true">→</span>
           </a>
         </div>
       </div>
 
-      <!-- Photo placeholder: 1 col -->
-      <div class="reveal">
-        <div class="aspect-square bg-surface border-2 border-brand/20 flex items-center justify-center text-gray-400 text-sm">
-          <!-- Replace with: <img src="/img/seema_photo.jpg" alt="Seema Poonia" class="w-full h-full object-cover" /> -->
-          <span class="text-center px-4 text-xs text-gray-400 leading-relaxed">
-            Add profile photo<br />
-            <code class="text-[10px]">public/img/seema_photo.jpg</code>
-          </span>
-        </div>
+      <!-- Highlights -->
+      <div class="space-y-4 lg:pt-12">
+        {highlights.map((item, i) => (
+          <div class="reveal card card-hover p-6 flex gap-4" style={`--d: ${i * 120}ms`}>
+            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-soft text-brand font-extrabold flex items-center justify-center">
+              0{i + 1}
+            </span>
+            <div>
+              <h3 class="font-bold text-gray-900 mb-1">{item.title}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{item.text}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
 
     <!-- Skills -->
-    <div class="mt-20 reveal">
-      <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-8">Skills</h3>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {skillGroups.map((group) => (
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-brand mb-3">
+    <div class="mt-24">
+      <h3 class="reveal text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Skills</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {skillGroups.map((group, i) => (
+          <div class="reveal card card-hover p-6" style={`--d: ${i * 100}ms`}>
+            <h4 class="text-xs font-bold uppercase tracking-widest text-brand mb-4">
               {group.name}
             </h4>
             <div class="flex flex-wrap gap-2">
               {group.skills.map((skill) => (
-                <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1.5 font-medium">
-                  {skill}
-                </span>
+                <span class="chip">{skill}</span>
               ))}
             </div>
           </div>

@@ -2,87 +2,198 @@
 import SectionLabel from './SectionLabel.astro';
 import { projects } from '../data/projects';
 
-const roleBadgeColor: Record<string, string> = {
-  'Sole Owner': 'bg-brand text-white',
-  'Lead':       'bg-gray-800 text-white',
-  'Contributor':'bg-gray-200 text-gray-700',
-};
+const featured = projects.filter((p) => p.featured);
+const rest = projects.filter((p) => !p.featured);
 ---
 
-<section id="projects" class="py-24 bg-white">
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="reveal">
-      <SectionLabel number="03" />
-      <h2 class="font-display text-5xl md:text-6xl text-gray-900 mb-4">
-        My <br />Projects
+<section id="projects" class="py-24 md:py-32 bg-surface">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="reveal mb-16 max-w-3xl">
+      <SectionLabel number="03" label="Projects" />
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight mb-5">
+        Products I've architected and launched
       </h2>
-      <p class="text-sm text-gray-400 mb-16">Things I've owned, led, and shipped.</p>
+      <p class="text-gray-600 leading-relaxed">
+        All at Electrum (formerly Pick My Solar), 2019 – present. For each product except the
+        Partner Portal, I designed the architecture, built and released the first version, then
+        led the team that took it forward as Team Lead. The Partner Portal I delivered end to end
+        myself. Internal and partner tools sit behind a login, so they're described here instead of linked.
+      </p>
     </div>
 
-    <div class="space-y-20">
-      {projects.map((project, i) => (
-        <div class={`reveal flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-10 items-center`}>
-          <!-- Image -->
-          <div class="w-full md:w-2/5 flex-shrink-0">
-            <img
-              src={project.img}
-              alt={project.imgAlt}
-              loading="lazy"
-              class="w-full h-64 object-cover object-top border border-gray-200"
-            />
+    <!-- Featured platform -->
+    {featured.map((project) => (
+      <article class="reveal card group relative overflow-hidden p-7 md:p-10 mb-6">
+        <span class="absolute top-0 left-0 h-1 w-24 bg-brand transition-all duration-700 group-hover:w-full" aria-hidden="true"></span>
+
+        <div class="grid lg:grid-cols-[320px,1fr] gap-10">
+          <div class="flex flex-col">
+            <span class="self-start text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand-soft text-brand mb-4">
+              {project.role}
+            </span>
+            <h3 class="text-3xl font-extrabold tracking-tight text-gray-900 mb-3">{project.title}</h3>
+            <p class="text-gray-600 leading-relaxed mb-4">{project.summary}</p>
+            <p class="text-sm text-gray-500 mb-6">
+              <span class="font-semibold text-gray-700">Users:</span> {project.audience}
+            </p>
+
+            {project.impact && (
+              <p class="text-sm text-gray-800 bg-brand-soft rounded-lg px-4 py-3 mb-6">
+                <span class="font-bold text-brand">Impact:</span> {project.impact}
+              </p>
+            )}
+
+            <div class="mt-auto">
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.stack.map((tech) => <span class="chip">{tech}</span>)}
+              </div>
+              {project.access && (
+                <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  {project.access}
+                </span>
+              )}
+            </div>
           </div>
 
-          <!-- Content -->
-          <div class="flex-1">
-            <!-- Badges -->
-            <div class="flex flex-wrap gap-2 mb-3">
-              <span class={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 ${roleBadgeColor[project.role]}`}>
-                {project.role}
-              </span>
-              {project.stack.map((tech) => (
-                <span class="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 border border-gray-200 text-gray-500">
-                  {tech}
-                </span>
-              ))}
+          {project.modules && (
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Modules I built</h4>
+              <ul class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                {project.modules.map((mod, i) => (
+                  <li
+                    class="reveal rounded-xl border border-gray-200 bg-surface/60 p-5 transition-all duration-300 hover:border-brand/50 hover:bg-white hover:shadow-card"
+                    style={`--d: ${i * 80}ms`}
+                  >
+                    <span class="block text-xs font-bold text-brand mb-1.5">0{i + 1}</span>
+                    <p class="font-bold text-gray-900 mb-1">{mod.name}</p>
+                    <p class="text-sm text-gray-600 leading-relaxed">{mod.text}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
+          )}
+        </div>
+      </article>
+    ))}
 
-            <h3 class="font-display text-2xl text-gray-900 mb-1">{project.title}</h3>
-            <p class="text-sm text-brand font-medium mb-4">{project.description}</p>
+    <!-- Other products -->
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {rest.map((project, i) => (
+        <article
+          class="reveal card card-hover group relative flex flex-col overflow-hidden p-7"
+          style={`--d: ${(i % 3) * 120}ms`}
+        >
+          <span class="absolute top-0 left-0 h-1 w-16 bg-brand transition-all duration-500 group-hover:w-full" aria-hidden="true"></span>
 
-            <ul class="space-y-2 mb-6">
-              {project.bullets.map((bullet) => (
-                <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                  <span class="text-brand mt-1 flex-shrink-0">▸</span>
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
+          <span class="self-start text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand-soft text-brand mb-4">
+            {project.role}
+          </span>
+          <h3 class="text-xl font-extrabold tracking-tight text-gray-900 mb-3">{project.title}</h3>
+          <p class="text-sm text-gray-600 leading-relaxed mb-4">{project.summary}</p>
 
-            <!-- CTA -->
-            {project.isInternal ? (
-              <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 border border-gray-200 px-4 py-2">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <p class="text-xs text-gray-500 mb-5">
+            <span class="font-semibold text-gray-700">Users:</span> {project.audience}
+          </p>
+
+          {project.bullets.length > 0 && (
+            <>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Key features</h4>
+              <ul class="space-y-2.5 mb-5">
+                {project.bullets.map((bullet) => (
+                  <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                    <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" aria-hidden="true"></span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {project.impact && (
+            <p class="text-sm text-gray-800 bg-brand-soft rounded-lg px-4 py-3 mb-5">
+              <span class="font-bold text-brand">Impact:</span> {project.impact}
+            </p>
+          )}
+
+          <div class="mt-auto pt-5 border-t border-gray-100">
+            {project.stack.length > 0 && (
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.stack.map((tech) => <span class="chip">{tech}</span>)}
+              </div>
+            )}
+
+            {project.links ? (
+              <div class="flex flex-wrap gap-x-5 gap-y-1">
+                {project.links.map((l) => (
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark"
+                  >
+                    Live: {l.label}
+                    <span class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
+            ) : project.access ? (
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500">
+                <svg class:list={['w-3.5 h-3.5', { hidden: !project.access.includes('login') }]} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
-                Internal Tool — Available on Request
+                {project.access}
               </span>
-            ) : project.link ? (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class={`inline-block text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors duration-200 ${
-                  project.linkLabel === 'View Document'
-                    ? 'border border-brand text-brand hover:bg-brand hover:text-white'
-                    : 'bg-brand text-white hover:bg-brand-dark'
-                }`}
-              >
-                {project.linkLabel}
-              </a>
             ) : null}
           </div>
-        </div>
+        </article>
       ))}
+
+      <!-- Call to action fills the last grid slot -->
+      <aside
+        class="reveal group relative flex flex-col overflow-hidden rounded-2xl bg-ink text-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+        style={`--d: ${(rest.length % 3) * 120}ms`}
+      >
+        <div class="absolute inset-0 hero-grid opacity-50" aria-hidden="true"></div>
+        <div class="absolute -bottom-24 -right-16 w-64 h-64 rounded-full bg-brand/30 blur-[80px] animate-float" aria-hidden="true"></div>
+
+        <div class="relative flex flex-col h-full">
+          <p class="self-start inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-semibold mb-6">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse-dot"></span>
+            Immediate Joiner
+          </p>
+          <h3 class="text-2xl font-extrabold tracking-tight leading-snug mb-4">
+            Hiring for a Senior or <span class="text-gradient">Lead role?</span>
+          </h3>
+          <p class="text-sm text-white/65 leading-relaxed mb-8">
+            I architect products, ship the first version, and lead the team that scales it.
+          </p>
+          <ul class="space-y-3 mb-8 text-sm">
+            {[
+              '8 years in React, Angular & TypeScript',
+              'Team Lead for a cross-functional team of 7',
+              '6 products architected and launched',
+              '20+ external partners onboarded',
+              'Hyderabad · Remote · Immediate joiner',
+            ].map((item) => (
+              <li class="flex gap-3 text-white/85">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/20 text-brand flex items-center justify-center text-[11px] font-bold" aria-hidden="true">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-auto flex flex-col gap-3">
+            <a href="#contact" class="btn-primary justify-center">
+              Let's talk <span class="arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="/Seema_Poonia_Resume.pdf" download class="btn-ghost justify-center">
+              Download CV <span class="arrow" aria-hidden="true">↓</span>
+            </a>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>

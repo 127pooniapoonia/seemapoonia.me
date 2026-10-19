@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://seemapoonia.me',
+  site: 'https://www.seemapoonia.me',
   output: 'server',
   security: { checkOrigin: false },
   adapter: vercel(),

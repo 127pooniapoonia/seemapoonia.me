@@ -7,12 +7,12 @@ interface Props {
 }
 
 const {
-  title = 'Seema Poonia — Senior Software Developer & Development Lead | React · Angular · TypeScript',
-  description = 'Senior Software Developer & Development Lead with 8+ years building scalable products from scratch in React & Angular. System design, team leadership, and end-to-end delivery at Electrum (formerly Pick My Solar India), India.',
+  title = 'Seema Poonia — Senior Software Engineer & Team Lead | React · Angular · TypeScript',
+  description = 'Senior Software Engineer (frontend-led full-stack) and Team Lead with 8 years building production platforms in React, Angular and TypeScript. Led a team of 7 at Electrum. Hyderabad, India · Immediate joiner.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/img/seema_cover.png', Astro.site);
+const ogImage = new URL('/img/og-image.png', Astro.site);
 ---
 
 <!doctype html>
@@ -27,7 +27,6 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
     <meta name="description" content={description} />
     <meta name="author" content="Seema Poonia" />
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="Seema Poonia, Senior Software Developer, Development Lead, React Developer, Angular Developer, TypeScript, System Design, Software Engineer India, Tech Lead India, Frontend Lead, Electrum, Pick My Solar India" />
 
     <!-- Open Graph -->
     <meta property="og:url" content={canonicalURL} />
@@ -43,6 +42,8 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Fonts — async load to avoid render-blocking -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,18 +51,15 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
       />
     </noscript>
-
-    <!-- Preload hero background -->
-    <link rel="preload" as="image" href="/img/bg-cover.jpg" />
 
     <!-- Google Analytics 4 — replace G-XXXXXXXX with your measurement ID -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
@@ -78,19 +76,20 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Seema Poonia",
-        "jobTitle": "Senior Software Developer & Development Lead",
-        "url": "https://seemapoonia.me",
+        "jobTitle": "Senior Software Engineer & Team Lead",
+        "url": "https://www.seemapoonia.me",
         "email": "seema.127poonia@gmail.com",
-        "image": "https://seemapoonia.me/img/seema_cover.png",
+        "image": "https://www.seemapoonia.me/img/og-image.png",
         "nationality": "Indian",
-        "description": "Senior Software Developer and Development Lead with 8+ years of experience architecting and building scalable web products from scratch using React and Angular. Focused on system design, technical leadership, and end-to-end delivery.",
+        "description": "Senior Software Engineer and Team Lead with 8 years of experience architecting and building scalable web products from scratch using React and Angular. Focused on system design, technical leadership, and end-to-end delivery.",
         "worksFor": {
           "@type": "Organization",
           "name": "Electrum",
           "alternateName": "Pick My Solar India Pvt. Ltd."
         },
+        "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressCountry": "IN" },
         "knowsAbout": [
-          "React", "Angular", "TypeScript", "JavaScript",
+          "React", "Angular", "TypeScript", "JavaScript", "Node.js", "AWS Lambda",
           "System Design", "Frontend Architecture", "Technical Leadership",
           "Performance Optimization", "UI Development", "Team Leadership"
         ],
@@ -102,7 +101,52 @@ const ogImage = new URL('/img/seema_cover.png', Astro.site);
     </script>
   </head>
 
-  <body class="font-sans text-gray-800 antialiased">
+  <body class="font-sans text-gray-700 antialiased bg-white">
     <slot />
+
+    <script>
+      // Scroll reveal
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+      // Count-up numbers: <span data-count="45.7" data-decimals="1">
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const countObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target as HTMLElement;
+            const target = Number(el.dataset.count);
+            const decimals = Number(el.dataset.decimals ?? 0);
+            countObserver.unobserve(el);
+            if (reduceMotion) {
+              el.textContent = target.toFixed(decimals);
+              return;
+            }
+            const start = performance.now();
+            const duration = 1400;
+            const tick = (now: number) => {
+              const p = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = (target * eased).toFixed(decimals);
+              if (p < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          });
+        },
+        { threshold: 0.5 }
+      );
+      document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
+    </script>
   </body>
 </html>

@@ -1,55 +1,93 @@
 ---
+const focus = ['React', 'Angular', 'TypeScript', 'Node.js', 'AWS Lambda'];
 ---
 
-<section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-  <!-- Hero image as <img> for fetchpriority + proper LCP tracking -->
-  <img
-    src="/img/bg-cover.jpg"
-    alt=""
-    fetchpriority="high"
-    loading="eager"
-    decoding="async"
-    width="1920"
-    height="1280"
-    class="absolute inset-0 w-full h-full object-cover object-center"
-    aria-hidden="true"
-  />
-  <!-- Dark overlay -->
-  <div class="absolute inset-0 bg-black/55"></div>
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-ink text-white">
+  <!-- Background: animated grid + soft glows -->
+  <div class="absolute inset-0 hero-grid" aria-hidden="true"></div>
+  <div class="absolute -top-32 -left-24 w-[520px] h-[520px] rounded-full bg-brand/25 blur-[120px] animate-float" aria-hidden="true"></div>
+  <div class="absolute bottom-[-180px] right-[-120px] w-[560px] h-[560px] rounded-full bg-indigo-500/20 blur-[130px] animate-float-slow" aria-hidden="true"></div>
 
-  <!-- Content -->
-  <div class="relative z-10 text-center px-6">
-    <p class="text-brand text-xs font-bold uppercase tracking-[0.3em] mb-6">
-      Senior Software Developer &amp; Development Lead
-    </p>
-    <h1 class="font-display text-6xl md:text-8xl font-bold text-white leading-none mb-6">
-      Seema Poonia
-    </h1>
-    <p class="text-white/70 text-base md:text-lg tracking-wide max-w-md mx-auto mb-10">
-      Building teams, products, and the architecture that makes shipping possible.
-    </p>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-20 w-full grid lg:grid-cols-[1.35fr,1fr] gap-14 items-center">
+    <!-- Left: intro -->
+    <div>
+      <p class="intro inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-white/85 mb-8" style="--d: 0ms">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse-dot"></span>
+        Open to Senior &amp; Lead roles · Immediate Joiner
+      </p>
 
-    <!-- CTAs -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a
-        href="#projects"
-        class="inline-block bg-brand hover:bg-brand-dark text-white text-xs font-bold uppercase tracking-widest px-8 py-4 transition-colors duration-200"
-      >
-        View My Work
-      </a>
-      <a
-        href="/img/Seema_Poonia_Senior_Frontend_Developer_Resume.pdf"
-        download
-        class="inline-block border border-white/60 hover:border-brand hover:text-brand text-white text-xs font-bold uppercase tracking-widest px-8 py-4 transition-colors duration-200"
-      >
-        Download CV
-      </a>
+      <h1 class="intro text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-5" style="--d: 120ms">
+        Seema Poonia
+      </h1>
+
+      <p class="intro text-lg sm:text-xl font-semibold mb-5" style="--d: 220ms">
+        <span class="text-gradient">Senior Software Engineer</span>
+        <span class="text-white/60"> (Frontend-led Full-Stack) <span class="whitespace-nowrap">· Team Lead</span></span>
+      </p>
+
+      <p class="intro text-white/65 text-base sm:text-lg leading-relaxed max-w-xl mb-10" style="--d: 320ms">
+        8 years building production platforms in React and Angular. I lead a cross-functional
+        team of 7 and own products end to end, from architecture to release.
+      </p>
+
+      <div class="intro flex flex-wrap gap-4" style="--d: 420ms">
+        <a href="#projects" class="btn-primary">
+          View my work <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a href="/Seema_Poonia_Resume.pdf" download class="btn-ghost">
+          Download CV <span class="arrow" aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: profile card -->
+    <div class="intro" style="--d: 520ms">
+      <div class="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-7 shadow-2xl">
+        <div class="flex items-center justify-between mb-6">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">Profile</span>
+          <span class="flex gap-1.5" aria-hidden="true">
+            <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white/15"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-brand"></span>
+          </span>
+        </div>
+
+        <dl class="space-y-4 text-sm">
+          <div class="flex justify-between gap-4 border-b border-white/10 pb-4">
+            <dt class="text-white/50">Current role</dt>
+            <dd class="font-semibold text-right">Team Lead · Electrum</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-b border-white/10 pb-4">
+            <dt class="text-white/50">Experience</dt>
+            <dd class="font-semibold text-right">8 years</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-b border-white/10 pb-4">
+            <dt class="text-white/50">Team</dt>
+            <dd class="font-semibold text-right">7 engineers · FE, BE, QA</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-b border-white/10 pb-4">
+            <dt class="text-white/50">Location</dt>
+            <dd class="font-semibold text-right">Hyderabad · Remote</dd>
+          </div>
+          <div class="flex justify-between gap-4">
+            <dt class="text-white/50">Availability</dt>
+            <dd class="font-semibold text-right text-green-400">Immediate joiner</dd>
+          </div>
+        </dl>
+
+        <div class="flex flex-wrap gap-2 mt-6">
+          {focus.map((tech) => (
+            <span class="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-white/10 text-white/80">{tech}</span>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-    <span class="text-[10px] uppercase tracking-widest">Scroll</span>
-    <div class="w-px h-8 bg-white/30"></div>
-  </div>
+  <!-- Scroll cue -->
+  <a href="#impact" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 hover:text-white/80 transition-colors" aria-label="Scroll down">
+    <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </a>
 </section>

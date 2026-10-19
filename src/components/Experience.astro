@@ -1,74 +1,113 @@
 ---
 import SectionLabel from './SectionLabel.astro';
 import { experience } from '../data/experience';
+
+// "What I built" shows this many items before "See more"
+const VISIBLE = 4;
 ---
 
-<section id="experience" class="py-24 bg-surface">
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="reveal">
-      <SectionLabel number="02" />
-      <h2 class="font-display text-5xl md:text-6xl text-gray-900 mb-16">
-        My <br />Experience
+<section id="experience" class="py-24 md:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="reveal mb-16">
+      <SectionLabel number="02" label="Experience" />
+      <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
+        Where I've worked
       </h2>
     </div>
 
-    <div class="space-y-16">
-      {experience.map((entry, i) => (
-        <div class="reveal relative pl-8">
-          <!-- Timeline line -->
-          <div class="timeline-line"></div>
-          <!-- Timeline dot -->
-          <div class="timeline-dot"></div>
-
-          <!-- Header -->
-          <div class="mb-6">
-            <span class="inline-block text-xs font-bold uppercase tracking-widest text-white bg-gray-800 px-3 py-1 mb-3">
-              {entry.period}
-            </span>
-            <h3 class="font-display text-3xl text-gray-900">
-              {entry.company}
-            </h3>
-            {entry.formerName && (
-              <p class="text-xs text-gray-400 mt-0.5">{entry.formerName}</p>
-            )}
-            <p class="text-brand font-bold tracking-wide text-sm mt-1">{entry.title}</p>
-          </div>
-
-          <!-- What I Built -->
-          {entry.built.length > 0 && (
-            <div class="mb-6">
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
-                What I Built
-              </h4>
-              <ul class="space-y-2">
-                {entry.built.map((item) => (
-                  <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                    <span class="text-brand mt-1 flex-shrink-0">▸</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <!-- How I Led -->
-          {entry.led.length > 0 && (
+    <div class="space-y-10">
+      {experience.map((entry) => (
+        <article class="reveal card p-7 md:p-10">
+          <div class="grid lg:grid-cols-[280px,1fr] gap-10">
+            <!-- Company + career path -->
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">
-                How I Led
-              </h4>
-              <ul class="space-y-2">
-                {entry.led.map((item) => (
-                  <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                    <span class="text-brand mt-1 flex-shrink-0">▸</span>
-                    <span>{item}</span>
+              <h3 class="text-2xl font-extrabold tracking-tight text-gray-900">{entry.company}</h3>
+              {entry.formerName && <p class="text-sm text-gray-500 mt-1">{entry.formerName}</p>}
+              <p class="text-sm text-gray-500 mt-1">
+                {entry.period}{entry.location && ` · ${entry.location}`}
+              </p>
+
+              <ol class="relative mt-8 space-y-6 border-l-2 border-gray-200 pl-6">
+                {entry.roles.map((role, i) => (
+                  <li class="relative">
+                    <span
+                      class:list={[
+                        'absolute -left-[33px] top-1 w-4 h-4 rounded-full border-4 border-white',
+                        i === 0 ? 'bg-brand ring-2 ring-brand/30' : 'bg-gray-300',
+                      ]}
+                      aria-hidden="true"
+                    ></span>
+                    <p class:list={['font-bold', i === 0 ? 'text-gray-900' : 'text-gray-600']}>{role.title}</p>
+                    <p class="text-xs text-gray-500 mt-0.5">{role.period}</p>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
-          )}
-        </div>
+
+            <!-- Work -->
+            <div class="grid md:grid-cols-2 gap-8">
+              {entry.built.length > 0 && (
+                <div>
+                  <h4 class="text-xs font-bold uppercase tracking-widest text-brand mb-4">What I built</h4>
+                  <ul class="space-y-3" id={`built-${entry.company.replace(/\W+/g, '-').toLowerCase()}`}>
+                    {entry.built.map((item, i) => (
+                      <li
+                        class:list={['flex gap-3 text-sm text-gray-600 leading-relaxed', { 'see-more-item hidden': i >= VISIBLE }]}
+                      >
+                        <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" aria-hidden="true"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {entry.built.length > VISIBLE && (
+                    <button
+                      type="button"
+                      class="see-more mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-brand-dark"
+                      aria-expanded="false"
+                      aria-controls={`built-${entry.company.replace(/\W+/g, '-').toLowerCase()}`}
+                      data-more={`See ${entry.built.length - VISIBLE} more`}
+                    >
+                      <span class="see-more-label">See {entry.built.length - VISIBLE} more</span>
+                      <svg class="see-more-icon w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              )}
+              {entry.led.length > 0 && (
+                <div>
+                  <h4 class="text-xs font-bold uppercase tracking-widest text-brand mb-4">How I led</h4>
+                  <ul class="space-y-3">
+                    {entry.led.map((item) => (
+                      <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                        <span class="mt-2 w-1.5 h-1.5 rounded-full bg-gray-900 flex-shrink-0" aria-hidden="true"></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.see-more').forEach((btn) => {
+    const list = document.getElementById(btn.getAttribute('aria-controls')!)!;
+    const label = btn.querySelector('.see-more-label')!;
+    const icon = btn.querySelector('.see-more-icon')!;
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      list.querySelectorAll('.see-more-item').forEach((li) => li.classList.toggle('hidden', expanded));
+      btn.setAttribute('aria-expanded', String(!expanded));
+      label.textContent = expanded ? btn.dataset.more! : 'See less';
+      icon.classList.toggle('rotate-180', !expanded);
+    });
+  });
+</script>

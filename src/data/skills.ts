@@ -6,25 +6,26 @@ export interface SkillGroup {
 export const skillGroups: SkillGroup[] = [
   {
     name: 'Frontend Engineering',
-    skills: ['React', 'Angular', 'TypeScript', 'JavaScript', 'HTML / CSS'],
+    skills: ['React', 'Redux', 'Redux Thunk', 'Angular 17+ (Signals)', 'RxJS', 'Angular Material', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Material UI'],
   },
   {
-    name: 'Backend & Data',
-    skills: ['Node.js', 'Express', 'Laravel', 'MySQL'],
+    name: 'Backend & Cloud',
+    skills: ['Node.js', 'Express', 'AWS Lambda', 'Serverless', 'Python', 'MySQL'],
   },
   {
-    name: 'Tooling & Design',
-    skills: ['Figma', 'Git', 'Gulp', 'ADA / WCAG'],
+    name: 'Quality & Observability',
+    skills: ['Jest', 'Vitest', 'Playwright', 'Lighthouse', 'ADA / WCAG', 'Datadog', 'Google Analytics', 'Segment', 'Mouseflow'],
   },
   {
-    name: 'Leadership & Process',
+    name: 'Leadership & Tooling',
     skills: [
-      'Tech Interviewing',
+      'Team Leadership',
       'Architecture Design',
-      'Agile / Scrum',
-      'Code Review',
-      'A/B Testing',
+      'Tech Interviewing',
       'Sprint Planning',
+      'Code Review',
+      'AI-assisted Dev (Claude, MCP)',
+      'Figma',
     ],
   },
 ];
