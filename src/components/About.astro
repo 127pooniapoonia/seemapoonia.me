@@ -11,7 +11,7 @@ const highlights = [
 
 <section id="about" class="py-24 md:py-32 bg-surface">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="grid lg:grid-cols-[1.2fr,1fr] gap-14 items-start">
+    <div class="grid lg:grid-cols-[1.2fr_1fr] gap-14 items-start">
       <!-- Story -->
       <div class="reveal">
         <SectionLabel number="01" label="About" />
@@ -50,7 +50,7 @@ const highlights = [
       <div class="space-y-4 lg:pt-12">
         {highlights.map((item, i) => (
           <div class="reveal card card-hover p-6 flex gap-4" style={`--d: ${i * 120}ms`}>
-            <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-soft text-brand font-extrabold flex items-center justify-center">
+            <span class="shrink-0 w-10 h-10 rounded-xl bg-brand-soft text-brand font-extrabold flex items-center justify-center">
               0{i + 1}
             </span>
             <div>

@@ -26,7 +26,7 @@ const rest = projects.filter((p) => !p.featured);
       <article class="reveal card group relative overflow-hidden p-7 md:p-10 mb-6">
         <span class="absolute top-0 left-0 h-1 w-24 bg-brand transition-all duration-700 group-hover:w-full" aria-hidden="true"></span>
 
-        <div class="grid lg:grid-cols-[320px,1fr] gap-10">
+        <div class="grid lg:grid-cols-[320px_1fr] gap-10">
           <div class="flex flex-col">
             <span class="self-start text-[11px] font-bold px-2.5 py-1 rounded-full bg-brand-soft text-brand mb-4">
               {project.role}
@@ -104,7 +104,7 @@ const rest = projects.filter((p) => !p.featured);
               <ul class="space-y-2.5 mb-5">
                 {project.bullets.map((bullet) => (
                   <li class="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                    <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" aria-hidden="true"></span>
+                    <span class="mt-2 w-1.5 h-1.5 rounded-full bg-brand shrink-0" aria-hidden="true"></span>
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -179,7 +179,7 @@ const rest = projects.filter((p) => !p.featured);
               'Hyderabad · Remote · Immediate joiner',
             ].map((item) => (
               <li class="flex gap-3 text-white/85">
-                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/20 text-brand flex items-center justify-center text-[11px] font-bold" aria-hidden="true">✓</span>
+                <span class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-brand/20 text-brand flex items-center justify-center text-[11px] font-bold" aria-hidden="true">✓</span>
                 {item}
               </li>
             ))}

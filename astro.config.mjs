@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
@@ -8,8 +8,6 @@ export default defineConfig({
   output: 'server',
   security: { checkOrigin: false },
   adapter: vercel(),
-  integrations: [
-    tailwind({ applyBaseStyles: false }),
-    sitemap(),
-  ],
+  integrations: [sitemap()],
+  vite: { plugins: [tailwindcss()] },
 });
