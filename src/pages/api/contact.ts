@@ -2,8 +2,28 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
+// Browsers send an Origin header on cross-origin form posts; reject anything
+// that isn't this site (or local dev) so the endpoint can't be driven from other sites.
+const ALLOWED_HOSTS = new Set([
+  'www.seemapoonia.me',
+  'seemapoonia.me',
+  'localhost',
+  '127.0.0.1',
+]);
+
+const LIMITS = { name: 100, email: 254, phone: 30, message: 5000 } as const;
+
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const origin = request.headers.get('origin');
+    if (origin) {
+      let host = '';
+      try { host = new URL(origin).hostname; } catch { /* invalid origin */ }
+      if (!ALLOWED_HOSTS.has(host)) {
+        return Response.json({ error: 'Forbidden.' }, { status: 403 });
+      }
+    }
+
     const formData = await request.formData();
     const name    = formData.get('name')?.toString().trim() ?? '';
     const email   = formData.get('email')?.toString().trim() ?? '';
@@ -17,6 +37,13 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (!name || !email || !message) {
       return Response.json({ error: 'Name, email, and message are required.' }, { status: 400 });
+    }
+
+    if (
+      name.length > LIMITS.name || email.length > LIMITS.email ||
+      phone.length > LIMITS.phone || message.length > LIMITS.message
+    ) {
+      return Response.json({ error: 'One or more fields are too long.' }, { status: 400 });
     }
 
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,7 +75,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to:   'seema.127poonia@gmail.com',
       reply_to: email,
-      subject: `[seemapoonia.me] New message from ${name}`,
+      subject: `[seemapoonia.me] New message from ${name.replace(/[\r\n]+/g, ' ')}`,
       html,
     });
 
