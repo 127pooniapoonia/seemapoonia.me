@@ -17,15 +17,15 @@ A fast, single-page site covering who I am, what I've shipped and how to reach m
 
 ## Tech stack
 
-- **[Astro 5](https://astro.build)** with server output (`output: 'server'`)
-- **[Tailwind CSS 3](https://tailwindcss.com)** via `@astrojs/tailwind`
+- **[Astro 7](https://astro.build)** with server output (`output: 'server'`)
+- **[Tailwind CSS 4](https://tailwindcss.com)** via the `@tailwindcss/vite` plugin; design tokens live in `src/styles/global.css` (`@theme`)
 - **Vercel** adapter (`@astrojs/vercel`) for hosting and the API route
 - **[Resend](https://resend.com)** for the contact form email
 - **`@astrojs/sitemap`**, plus JSON-LD structured data and Open Graph tags in the layout for SEO
 
 ## Getting started
 
-Requires Node.js 18+ (use the latest LTS).
+Requires Node.js 22.22 or newer (Astro 7).
 
 ```bash
 npm install
@@ -62,6 +62,13 @@ public/           Static assets: images, résumé PDF, robots.txt, CNAME
 ```
 
 To update the site's content, edit the files in `src/data/`. Titles, availability text and SEO metadata live in the section components and `src/layouts/Layout.astro`.
+
+## Security
+
+- Dependencies are kept at **0 known vulnerabilities** (`npm audit`); a `path-to-regexp` override patches a transitive dependency of the Vercel adapter.
+- `vercel.json` sets security headers (HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`).
+- The contact endpoint (`src/pages/api/contact.ts`) validates input, enforces field length limits, checks the request `Origin` against an allow-list, includes a honeypot field for bots, and escapes all user content before emailing it.
+- Secrets live only in environment variables; `.env` is git-ignored and `.env.example` holds placeholders.
 
 ## Deployment
 
