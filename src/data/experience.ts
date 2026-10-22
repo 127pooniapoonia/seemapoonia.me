@@ -11,7 +11,7 @@ export interface ExperienceEntry {
 export const experience: ExperienceEntry[] = [
   {
     company: 'Electrum',
-    formerName: 'formerly Pick My Solar India Pvt. Ltd · CleanTech (solar energy & EV)',
+    formerName: 'formerly Pick My Solar India Pvt. Ltd · Solar Energy & EV',
     roles: [
       { title: 'Team Lead', period: 'Sep 2024 – Present' },
       { title: 'Senior Frontend Developer', period: 'Apr 2021 – Aug 2024' },
@@ -34,7 +34,7 @@ export const experience: ExperienceEntry[] = [
     led: [
       'Lead a cross-functional team of 7 (frontend, backend, QA) — sprint planning, LOE estimation, PR-review standards and technical feasibility assessment.',
       'Conduct frontend technical interviews and onboard new engineers.',
-      'Defined architecture, prioritization and edge cases for backend services built with the senior backend engineer: a predictive lead-distribution engine ranking thousands of installers, a secure PII file-processing pipeline (CRON, SFTP, AWS Lambda), and a serverless coupon microservice whose first campaign issued 20,000 coupons at a 90% redemption rate.',
+      'Defined architecture, prioritization and edge cases for backend services built with the senior backend engineer: a lead-distribution engine ranking thousands of installers, a secure PII file-processing pipeline (CRON, SFTP, AWS Lambda), and a serverless coupon microservice whose first campaign issued 20,000 coupons at a 90% redemption rate.',
       "After launching each product's first version, handed it over to the team and led its continued development as Team Lead.",
       'Own release management and deployments across Dev / UAT / Production environments.',
       'Primary R&D lead for new product problem statements — trusted by executive leadership to scope and prototype novel solutions.',
